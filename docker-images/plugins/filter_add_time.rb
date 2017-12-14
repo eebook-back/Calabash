@@ -18,7 +18,7 @@ class Fluent::AddTimeFilter < Fluent::Filter
 		return
 	end
     record[@time_key] = Time.now.strftime '%Y-%m-%dT%H:%M:%S.%L'
-    record['time'] = (Time.parse(Time.now.utc.iso8601(6)).to_f*1000000).to_i
+    record['time8601'] = (Time.parse(Time.now.utc.iso8601(6)).to_f*1000000).to_i
     return record
   end
 end if defined?(Fluent::Filter)
