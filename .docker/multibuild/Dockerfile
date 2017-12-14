@@ -1,7 +1,7 @@
 FROM golang:1.8.3 as builder
 WORKDIR /go/src/github.com/AliyunContainerService/fluentd-pilot/
 COPY . /go/src/github.com/AliyunContainerService/fluentd-pilot/
-RUN CGO_ENABLED=0 GOOS=linux go build -o xxhzdy ./main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o pilot ./main.go
 
 FROM alpine:3.5
 
