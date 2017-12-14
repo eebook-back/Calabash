@@ -21,11 +21,11 @@ RUN apk update && apk upgrade && \
   apk del build-base ruby-dev && \
   rm -rf /root/.gem
 
-COPY plugins/ /etc/fluentd/plugins/
+COPY docker-images/plugins/ /etc/fluentd/plugins/
 
 VOLUME /etc/fluentd/conf.d
 
-COPY fluentd.tpl entrypoint config.default /pilot/
+COPY docker-images/fluentd.tpl docker-images/entrypoint docker-images/config.default /pilot/
 COPY --from=builder /go/src/github.com/AliyunContainerService/fluentd-pilot/bin/pilot /pilot/
 VOLUME /pilot/pos
 
