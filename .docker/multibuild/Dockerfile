@@ -1,7 +1,7 @@
 FROM golang:1.8.3 as builder
 WORKDIR /go/src/github.com/AliyunContainerService/fluentd-pilot/
 COPY . /go/src/github.com/AliyunContainerService/fluentd-pilot/
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o pilot ./main.go
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o bin/pilot ./main.go
 
 FROM alpine:3.5
 
@@ -26,7 +26,7 @@ COPY plugins/ /etc/fluentd/plugins/
 VOLUME /etc/fluentd/conf.d
 
 COPY fluentd.tpl entrypoint config.default /pilot/
-COPY --from=builder /go/src/github.com/AliyunContainerService/fluentd-pilot/pilot /pilot/
+COPY --from=builder /go/src/github.com/AliyunContainerService/fluentd-pilot/bin/pilot /pilot/
 VOLUME /pilot/pos
 
 EXPOSE 24224
